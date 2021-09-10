@@ -1,0 +1,29 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+  http://www.liquibase.org/xml/ns/pro
+  http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+    <changeSet  author="ilgaynulin"  id="changelog-003-add-sample-data-survey-table">
+        <insert  dbms="postgresql"
+                 schemaName="public"
+                 tableName="survey">
+            <column  name="id"  value="50"/>
+            <column  name="name" value="Customer opinion"/>
+            <column  name="start_date" value="2021-09-09 12:22:25"/>
+            <column  name="finish_date" value="2021-09-16 12:22:25"/>
+            <column  name="active" value="true"/>
+        </insert>
+        <insert  dbms="postgresql"
+                 schemaName="public"
+                 tableName="survey">
+            <column  name="id"  value="20"/>
+            <column  name="name" value="Course feedback"/>
+            <column  name="start_date" value="2021-07-11 10:12:41"/>
+            <column  name="finish_date" value="2021-07-25 10:12:41"/>
+            <column  name="active" value="true"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,44 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+  http://www.liquibase.org/xml/ns/pro
+  http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+    <changeSet  author="ilgaynulin"  id="changelog-003-add-sample-data-survey-table">
+        <insert  dbms="postgresql"
+                 schemaName="public"
+                 tableName="question">
+            <column  name="id"  value="234"/>
+            <column  name="question_text" value="Would you recommend our product?"/>
+            <column  name="question_order" value="100"/>
+            <column  name="survey_id" value="50"/>
+        </insert>
+        <insert  dbms="postgresql"
+                 schemaName="public"
+                 tableName="question">
+            <column  name="id"  value="235"/>
+            <column  name="question_text" value="How many times you visited our website?"/>
+            <column  name="question_order" value="200"/>
+            <column  name="survey_id" value="50"/>
+        </insert>
+
+        <insert  dbms="postgresql"
+                 schemaName="public"
+                 tableName="question">
+            <column  name="id"  value="236"/>
+            <column  name="question_text" value="How do you really feel about this course?"/>
+            <column  name="question_order" value="100"/>
+            <column  name="survey_id" value="20"/>
+        </insert>
+        <insert  dbms="postgresql"
+                 schemaName="public"
+                 tableName="question">
+            <column  name="id"  value="237"/>
+            <column  name="question_text" value="Will you recommend our courses to friends and family?"/>
+            <column  name="question_order" value="200"/>
+            <column  name="survey_id" value="20"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
