@@ -8,6 +8,7 @@ git clone https://github.com/ilgaynulin/survey-rest-service.git
 ```
 Переходим в корневой каталог клонированного проекта и выполняем следующие команды
 ```
+./mvnw install
 docker build -f Dockerfile -t spring-survey-app .
 docker pull postgres:alpine
 docker-compose up
