@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.github.ilgaynulin</groupId>
     <artifactId>survey-rest-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>survey-rest-service</name>
     <description>REST service for managing survey reference data</description>
     <properties>

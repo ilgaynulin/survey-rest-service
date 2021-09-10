@@ -1,5 +1,26 @@
 # Survey Rest Service
 
+## Инструкция по запуску
+
+Клонируем проект с помощью командной строки выполнив команду
+```
+git clone https://github.com/ilgaynulin/survey-rest-service.git
+```
+Переходим в корневой каталог клонированного проекта и выполняем следующие команды
+```
+docker build -f Dockerfile -t spring-survey-app .
+docker pull postgres:alpine
+docker-compose up
+```
+Приложение развёрнуто и принимает запросы на
+```
+http://localhost:8080/
+```
+В Swagger можно попасть по адресу
+```
+http://localhost:8080/swagger-ui.html
+```
+
 ## Задание
 
 Необходимо создать REST - сервис для управления справочными данными.
