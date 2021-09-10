@@ -37,10 +37,10 @@ public class QuestionServiceImpl implements QuestionService{
     }
 
     @Override
-    public Question addQuestion(QuestionEntryDto entryDto) {
-        Survey survey = surveyRepository.findById(entryDto.getSurveyId()).orElse(null);
-        if(survey == null) {
-            return null;
+    public Question addQuestion(QuestionEntryDto entryDto){
+        Optional<Survey> foundSurvey = surveyRepository.findById(entryDto.getSurveyId());
+        if(!foundSurvey.isPresent()) {
+            throw new IllegalArgumentException("Survey with id = " + entryDto.getSurveyId() + " not found");
         }
         int newQuestionOrderNum = questionRepository.findAllBySurveyId(entryDto.getSurveyId())
                 .stream()
@@ -51,7 +51,7 @@ public class QuestionServiceImpl implements QuestionService{
         Question newQuestion = new Question();
         newQuestion.setQuestionText(entryDto.getQuestionText());
         newQuestion.setQuestionOrder(newQuestionOrderNum);
-        newQuestion.setSurvey(survey);
+        newQuestion.setSurvey(foundSurvey.get());
 
         return questionRepository.save(newQuestion);
     }
@@ -62,14 +62,16 @@ public class QuestionServiceImpl implements QuestionService{
     }
 
     @Override
-    public Question saveQuestion(EditQuestionDto editDto) {
-
-        Survey survey = surveyRepository.findById(editDto.getSurveyId()).orElse(null);
-        if(survey == null) {
-            return null;
+    public Question updateQuestion(EditQuestionDto editDto) {
+        Optional<Question> foundQuestion = questionRepository.findById(editDto.getId());
+        if(!foundQuestion.isPresent()) {
+            throw new IllegalArgumentException("Question with id = " + editDto.getId() + " not found");
         }
-        Question question = editDto.toQuestion();
-        question.setSurvey(survey);
-        return questionRepository.save(question);
+
+        Question updatedQuestion = foundQuestion.get();
+        updatedQuestion.setQuestionText(editDto.getQuestionText());
+        updatedQuestion.setQuestionOrder(editDto.getQuestionOrder());
+
+        return questionRepository.save(updatedQuestion);
     }
 }

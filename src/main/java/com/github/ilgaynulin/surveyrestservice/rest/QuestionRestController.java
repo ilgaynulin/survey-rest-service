@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -36,15 +37,15 @@ public class QuestionRestController {
 
     @PostMapping
     public ResponseEntity<Question> addQuestion(
-            @RequestBody QuestionEntryDto questionEntryDto) {
+            @RequestBody @Valid QuestionEntryDto questionEntryDto) {
         Question savedQuestion = questionService.addQuestion(questionEntryDto);
-        return new ResponseEntity<Question>(savedQuestion, HttpStatus.OK);
+        return new ResponseEntity<Question>(savedQuestion, HttpStatus.CREATED);
     }
 
     @PutMapping
     public ResponseEntity<Question> updateQuestion(
-            @RequestBody EditQuestionDto editQuestionDto) {
-        Question updatedQuestion = questionService.saveQuestion(editQuestionDto);
+            @RequestBody @Valid EditQuestionDto editQuestionDto) {
+        Question updatedQuestion = questionService.updateQuestion(editQuestionDto);
 
         return new ResponseEntity<Question>(updatedQuestion, HttpStatus.OK);
     }

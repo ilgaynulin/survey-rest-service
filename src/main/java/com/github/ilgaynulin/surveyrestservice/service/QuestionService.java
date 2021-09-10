@@ -11,5 +11,5 @@ public interface QuestionService {
     public Page<Question> getQuestionsBySurveyId(int pageNum, int pageSize, String sortBy, Optional<Long> surveyId);
     public Question addQuestion(QuestionEntryDto questionEntryDto);
     public void deleteQuestion(Long questionId);
-    public Question saveQuestion(EditQuestionDto question);
+    public Question updateQuestion(EditQuestionDto question);
 }

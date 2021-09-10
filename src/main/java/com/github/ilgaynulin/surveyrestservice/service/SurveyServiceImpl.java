@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Queue;
 
 @Service
@@ -34,23 +35,21 @@ public class SurveyServiceImpl implements SurveyService {
         while(!searchCriteria.isEmpty()) {
             spec.and(new SurveySpecification(searchCriteria.poll()));
         }
-
         return surveyRepository.findAll(spec, PageRequest.of(pageNum, pageSize, Sort.by(sortBy).descending()));
     }
 
     @Override
     public Survey update(SurveyUpdateDto updateDto) {
-        if(surveyRepository.findById(updateDto.getId()) == null) {
-            return null;
+        Optional<Survey> foundSurvey = surveyRepository.findById(updateDto.getId());
+        if(!foundSurvey.isPresent()) {
+            throw new IllegalArgumentException("Survey with id = " + updateDto.getId() + " not found");
         }
-        Survey savedSurvey = surveyRepository.save(updateDto.toSurvey());
-        return savedSurvey;
+        return surveyRepository.save(updateDto.toSurvey());
     }
 
     @Override
     public Survey add(SurveyEntryDto entryDto) {
-        Survey savedSurvey = surveyRepository.save(entryDto.toSurvey());
-        return savedSurvey;
+        return surveyRepository.save(entryDto.toSurvey());
     }
 
     @Override

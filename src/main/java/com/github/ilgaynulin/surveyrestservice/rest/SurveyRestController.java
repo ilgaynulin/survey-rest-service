@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.*;
 
 @RestController
@@ -50,14 +51,14 @@ public class SurveyRestController {
 
     @PostMapping
     public ResponseEntity<Survey> addSurvey(
-            @RequestBody SurveyEntryDto surveyEntryDto) {
+            @RequestBody @Valid SurveyEntryDto surveyEntryDto) {
         Survey savedSurvey = surveyService.add(surveyEntryDto);
         return new ResponseEntity<>(savedSurvey, HttpStatus.CREATED);
     }
 
     @PutMapping
     public ResponseEntity<Survey> updateSurvey(
-            @RequestBody SurveyUpdateDto surveyUpdateDto) {
+            @RequestBody @Valid SurveyUpdateDto surveyUpdateDto) {
         Survey updatedSurvey = surveyService.update(surveyUpdateDto);
         return new ResponseEntity<>(updatedSurvey, HttpStatus.OK);
     }

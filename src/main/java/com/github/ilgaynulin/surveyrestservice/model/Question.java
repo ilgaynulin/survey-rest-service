@@ -20,6 +20,16 @@ public class Question {
     @JsonBackReference
     private Survey survey;
 
+    public Question() {
+    }
+
+    public Question(Long id, String questionText, Integer questionOrder, Survey survey) {
+        this.id = id;
+        this.questionText = questionText;
+        this.questionOrder = questionOrder;
+        this.survey = survey;
+    }
+
     public Long getId() {
         return id;
     }

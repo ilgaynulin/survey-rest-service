@@ -2,13 +2,19 @@ package com.github.ilgaynulin.surveyrestservice.dto;
 
 import com.github.ilgaynulin.surveyrestservice.model.Survey;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class SurveyUpdateDto {
+    @NotNull
     private Long id;
+    @NotNull
     private String name;
+    @NotNull
     private Date startDate;
+    @NotNull
     private Date finishDate;
+    @NotNull
     private boolean active;
 
     public Survey toSurvey() {
