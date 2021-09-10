@@ -15,8 +15,9 @@ import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.Optional;
 
+
 @Service
-public class QuestionServiceImpl implements QuestionService{
+public class QuestionServiceImpl implements QuestionService {
     QuestionRepository questionRepository;
     SurveyRepository surveyRepository;
 
@@ -26,6 +27,10 @@ public class QuestionServiceImpl implements QuestionService{
         this.surveyRepository = surveyRepository;
     }
 
+    /**
+     * {@inheritDoc}
+     * @param sortBy the field by which the results were sorted in ascending direction
+     */
     @Override
     public Page<Question> getQuestionsBySurveyId(int pageNum, int pageSize, String sortBy, Optional<Long> surveyId) {
         if(surveyId.isPresent()) {
@@ -36,6 +41,15 @@ public class QuestionServiceImpl implements QuestionService{
         return questionRepository.findAll(PageRequest.of(pageNum, pageSize, Sort.by(sortBy).ascending()));
     }
 
+    /**
+     * {@inheritDoc}
+     * Method finds question from survey with greatest {@link Question}.questionOrder field and saves new question
+     * with incremented {@link Question}.questionOrder by 100.
+     * If questions not found sets questionOrder to 100.
+     * <p>
+     * If survey not found in database by provided {@link QuestionEntryDto}.id,
+     * then throws {@link IllegalArgumentException}
+     */
     @Override
     public Question addQuestion(QuestionEntryDto entryDto){
         Optional<Survey> foundSurvey = surveyRepository.findById(entryDto.getSurveyId());
@@ -61,6 +75,11 @@ public class QuestionServiceImpl implements QuestionService{
         questionRepository.deleteById(questionId);
     }
 
+    /**
+     * {@inheritDoc}
+     * If question not found in database by provided {@link EditQuestionDto}.id,
+     * then throws {@link IllegalArgumentException}
+     */
     @Override
     public Question updateQuestion(EditQuestionDto editDto) {
         Optional<Question> foundQuestion = questionRepository.findById(editDto.getId());

@@ -1,5 +1,11 @@
 package com.github.ilgaynulin.surveyrestservice.repository;
 
+/**
+ * The class is used as a container for storing parameters for the criteria builder class
+ * (e.g. {@link SurveySpecification}), by which we filter the objects that we want to get
+ * from the repository
+ * @author ilgaynulin
+ */
 public class SearchCriteria {
 
     private String key;

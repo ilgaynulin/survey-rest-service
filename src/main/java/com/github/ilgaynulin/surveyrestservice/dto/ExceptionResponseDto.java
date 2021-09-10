@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
 
+/**
+ * Specifies JSON object, which will be send in response while handled exceptions
+ * @author ilgaynulin
+ */
 public class ExceptionResponseDto {
     private String error;
     private String message;

@@ -38,6 +38,11 @@ public class SurveyServiceImpl implements SurveyService {
         return surveyRepository.findAll(spec, PageRequest.of(pageNum, pageSize, Sort.by(sortBy).descending()));
     }
 
+    /**
+     * {@inheritDoc}
+     * If survey not found in database by provided {@link SurveyUpdateDto}.id,
+     * then throws {@link IllegalArgumentException}
+     */
     @Override
     public Survey update(SurveyUpdateDto updateDto) {
         Optional<Survey> foundSurvey = surveyRepository.findById(updateDto.getId());

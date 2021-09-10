@@ -11,6 +11,14 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
+/**
+ * Class is using for building flexible search objects from repository with different searching filters
+ * Class accepts {@link SearchCriteria} with operation field:
+ * "during" - for objects whose field matches the specified date and time from 00:00 to 23:59
+ * "equals" - for objects whose field is equal to the specified value
+ * otherwise - returns null
+ * @author ilgaynulin
+ */
 public class SurveySpecification implements Specification<Survey> {
     private SearchCriteria criteria;
 
@@ -22,6 +30,7 @@ public class SurveySpecification implements Specification<Survey> {
     public SearchCriteria getCriteria() {
         return criteria;
     }
+
     @Override
     public Predicate toPredicate(Root<Survey> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
         if(criteria.getOperation().equalsIgnoreCase("during")) {

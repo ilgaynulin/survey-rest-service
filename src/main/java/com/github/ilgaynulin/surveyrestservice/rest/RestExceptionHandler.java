@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.LocalDateTime;
 
+/**
+ * Class specifies how to handle specific exceptions in application during work
+ * @author ilgaynulin
+ */
+
 @ControllerAdvice
 public class RestExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
@@ -23,6 +28,9 @@ public class RestExceptionHandler {
         return new ResponseEntity<ExceptionResponseDto>(response, HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * Handles JSON parsing exceptions. Method hides code structure information from message.
+     */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ExceptionResponseDto> parseException(HttpMessageNotReadableException ex) {
         ExceptionResponseDto response = new ExceptionResponseDto();
